@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Vexer MC | The Ultimate Minecraft SMP Experience</title>
+    <meta name="description" content="Join Vexer MC, a premium Minecraft SMP server. Explore our balanced economy, fair ranks, and dedicated community. Play today!">
+    <meta name="keywords" content="Minecraft, SMP, Vexer MC, Minecraft Server, Survival Multiplayer, VIP Ranks, Minecraft Discord">
+    <meta name="author" content="Vexer MC">
+    <link rel="canonical" href="https://vexermc.com/">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vexermc.com/">
+    <meta property="og:title" content="Vexer MC | Premium Minecraft SMP">
+    <meta property="og:description" content="Join Vexer MC, a premium Minecraft SMP server with balanced ranks and a great community.">
+    <meta property="og:image" content="https://vexermc.com/assets/og-image.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Vexer MC | Premium Minecraft SMP">
+    <meta property="twitter:description" content="Join Vexer MC today! Balanced economy, fair ranks, and an active community.">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.mcsrvstat.us https://discord.com; img-src 'self' data: https://cdn.discordapp.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#8b5cf6', // Violet 500
+                            dark: '#6d28d9',   // Violet 700
+                        },
+                        mc: '#22c55e', // Minecraft Green
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar and utilities */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111827; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
+        
+        .rtl-font { font-family: 'Tajawal', sans-serif; }
+        .ltr-font { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased selection:bg-brand selection:text-white">
+
+    <nav class="fixed w-full z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-bold text-2xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-400">
+                    VEXER MC
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6 space-x-reverse">
+                        <a href="#home" class="hover:text-brand transition-colors px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav_home">Home</a>
+                        <a href="#rules" class="hover:text-brand transition-colors px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav_rules">Rules</a>
+                        <a href="#ranks" class="hover:text-brand transition-colors px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav_ranks">Ranks</a>
+                        <a href="#staff" class="hover:text-brand transition-colors px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav_staff">Staff</a>
+                    </div>
+                </div>
+                <div>
+                    <button id="langToggle" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors border border-gray-700">
+                        عربي
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 px-4 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6" data-i18n="hero_title">
+            The Ultimate <span class="text-transparent bg-clip-text bg-gradient-to-r from-mc to-emerald-400">SMP</span> Experience
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mb-10" data-i18n="hero_desc">
+            Join thousands of players in a balanced, lag-free survival world. Craft, build, and conquer together.
+        </p>
+        
+        <div class="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 flex flex-col items-center shadow-xl">
+            <div class="flex items-center space-x-3 mb-4 space-x-reverse">
+                <div id="statusDot" class="w-3 h-3 rounded-full bg-gray-500 animate-pulse"></div>
+                <span id="playerCount" class="font-medium text-gray-300" data-i18n="status_loading">Checking server status...</span>
+            </div>
+            
+            <button id="copyIpBtn" class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-brand hover:bg-brand-dark font-mono rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-gray-900">
+                <span id="ipText">play.vexermc.com</span>
+                <span id="copyFeedback" class="absolute inset-0 flex items-center justify-center bg-green-500 translate-y-full transition-transform duration-300 ease-in-out">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span data-i18n="copied">Copied!</span>
+                </span>
+            </button>
+            <p class="text-sm text-gray-500 mt-3" data-i18n="click_to_copy">Click to copy IP (Port: 25565)</p>
+        </div>
+    </section>
+
+    <section id="rules" class="py-20 bg-gray-800/30 border-y border-gray-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-10 text-center" data-i18n="rules_title">Server Rules</h2>
+            <div class="grid gap-4">
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-brand/50 transition-colors">
+                    <h3 class="text-xl font-bold mb-2 text-white" data-i18n="rule1_title">1. No Hacking or Cheating</h3>
+                    <p class="text-gray-400" data-i18n="rule1_desc">Use of x-ray, modified clients, or exploiting bugs will result in a permanent ban.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-brand/50 transition-colors">
+                    <h3 class="text-xl font-bold mb-2 text-white" data-i18n="rule2_title">2. Respect All Players</h3>
+                    <p class="text-gray-400" data-i18n="rule2_desc">No harassment, hate speech, or excessive toxicity in the global chat.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-brand/50 transition-colors">
+                    <h3 class="text-xl font-bold mb-2 text-white" data-i18n="rule3_title">3. No Griefing Protected Areas</h3>
+                    <p class="text-gray-400" data-i18n="rule3_desc">Raiding unclaimed land is allowed, but bypassing claim protections is forbidden.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ranks" class="py-20 px-4 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4 text-center" data-i18n="ranks_title">Server Ranks</h2>
+        <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto" data-i18n="ranks_desc">Support the server and get fair, balanced perks. No pay-to-win elements.</p>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700 flex flex-col">
+                <h3 class="text-2xl font-bold text-gray-200 mb-2">VIP</h3>
+                <div class="text-3xl font-extrabold text-white mb-6">$5<span class="text-lg text-gray-500 font-normal">/mo</span></div>
+                <ul class="space-y-3 mb-8 flex-1 text-gray-400">
+                    <li class="flex items-center"><span class="text-mc mr-2">✓</span> <span data-i18n="perk_queue">Priority Queue</span></li>
+                    <li class="flex items-center"><span class="text-mc mr-2">✓</span> <span data-i18n="perk_homes">3 Set Homes</span></li>
+                    <li class="flex items-center"><span class="text-mc mr-2">✓</span> <span data-i18n="perk_prefix">Custom Prefix</span></li>
+                </ul>
+                <button class="w-full py-3 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-bold transition-colors" data-i18n="buy_now">Purchase</button>
+            </div>
+            
+            <div class="bg-gray-800 rounded-2xl p-8 border-2 border-brand relative flex flex-col transform md:-translate-y-4 shadow-2xl shadow-brand/20">
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand text-white px-4 py-1 rounded-full text-sm font-bold" data-i18n="popular">Most Popular</div>
+                <h3 class="text-2xl font-bold text-brand mb-2">VIP+</h3>
+                <div class="text-3xl font-extrabold text-white mb-6">$10<span class="text-lg text-gray-500 font-normal">/mo</span></div>
+                <ul class="space-y-3 mb-8 flex-1 text-gray-300">
+                    <li class="flex items-center"><span class="text-brand mr-2">✓</span> <span data-i18n="perk_queue">Priority Queue</span></li>
+                    <li class="flex items-center"><span class="text-brand mr-2">✓</span> <span data-i18n="perk_homes5">5 Set Homes</span></li>
+                    <li class="flex items-center"><span class="text-brand mr-2">✓</span> <span data-i18n="perk_kit">Weekly Kit</span></li>
+                    <li class="flex items-center"><span class="text-brand mr-2">✓</span> <span data-i18n="perk_color">Colored Chat</span></li>
+                </ul>
+                <button class="w-full py-3 rounded-lg bg-brand hover:bg-brand-dark text-white font-bold transition-colors" data-i18n="buy_now">Purchase</button>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700 flex flex-col">
+                <h3 class="text-2xl font-bold text-yellow-500 mb-2">MVP</h3>
+                <div class="text-3xl font-extrabold text-white mb-6">$25<span class="text-lg text-gray-500 font-normal">/mo</span></div>
+                <ul class="space-y-3 mb-8 flex-1 text-gray-400">
+                    <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> <span data-i18n="perk_all">All VIP+ Perks</span></li>
+                    <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> <span data-i18n="perk_homes10">10 Set Homes</span></li>
+                    <li class="flex items-center"><span class="text-yellow-500 mr-2">✓</span> <span data-i18n="perk_fly">Spawn Fly</span></li>
+                </ul>
+                <button class="w-full py-3 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-bold transition-colors" data-i18n="buy_now">Purchase</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="staff" class="py-20 bg-gray-800/30 border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-10 text-center" data-i18n="staff_title">Our Administration</h2>
+            <div id="staffContainer" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 py-12 border-t border-gray-800 text-center">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <div class="flex space-x-6 space-x-reverse mb-8">
+                <a href="#" aria-label="Discord" class="text-gray-500 hover:text-indigo-500 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                </a>
+                <a href="#" aria-label="X (Twitter)" class="text-gray-500 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 4.072H5.059z"/></svg>
+                </a>
+            </div>
+            <p class="text-gray-600 text-sm">© 2026 Vexer MC. Not affiliated with Mojang AB.</p>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * CONFIGURATION & CONSTANTS
+         */
+        const CONFIG = {
+            SERVER_IP: 'play.vexermc.com',
+            MINECRAFT_API: 'https://api.mcsrvstat.us/3/play.vexermc.com',
+            // Note: Discord widget JSON URL. Requires "Enable Server Widget" in Discord server settings.
+            DISCORD_API: 'https://discord.com/api/guilds/YOUR_SERVER_ID/widget.json', 
+            API_RATE_LIMIT_MS: 30000 // 30 seconds cache/cooldown
+        };
+
+        /**
+         * 🌍 LOCALIZATION (Bilingual System)
+         */
+        let currentLang = 'en';
+        
+        const translations = {
+            en: {
+                nav_home: "Home", nav_rules: "Rules", nav_ranks: "Ranks", nav_staff: "Staff",
+                hero_title: "The Ultimate SMP Experience",
+                hero_desc: "Join thousands of players in a balanced, lag-free survival world. Craft, build, and conquer together.",
+                status_online: "Online", status_offline: "Server Offline", status_loading: "Checking server...",
+                copied: "Copied!", click_to_copy: "Click to copy IP (Port: 25565)",
+                rules_title: "Server Rules",
+                rule1_title: "1. No Hacking or Cheating", rule1_desc: "Use of x-ray, modified clients, or exploiting bugs will result in a permanent ban.",
+                rule2_title: "2. Respect All Players", rule2_desc: "No harassment, hate speech, or excessive toxicity in the global chat.",
+                rule3_title: "3. No Griefing Protected Areas", rule3_desc: "Raiding unclaimed land is allowed, but bypassing claim protections is forbidden.",
+                ranks_title: "Server Ranks", ranks_desc: "Support the server and get fair, balanced perks. No pay-to-win elements.",
+                perk_queue: "Priority Queue", perk_homes: "3 Set Homes", perk_prefix: "Custom Prefix",
+                perk_homes5: "5 Set Homes", perk_kit: "Weekly Kit", perk_color: "Colored Chat",
+                perk_all: "All VIP+ Perks", perk_homes10: "10 Set Homes", perk_fly: "Spawn Fly",
+                buy_now: "Purchase", popular: "Most Popular",
+                staff_title: "Our Administration", role_admin: "Admin", role_mod: "Moderator"
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_rules: "القوانين", nav_ranks: "الرتب", nav_staff: "الإدارة",
+                hero_title: "أفضل تجربة سيرفايفل",
+                hero_desc: "انضم لآلاف اللاعبين في عالم سيرفايفل متوازن وبدون لاق. ابنِ، اصنع، وسيطر.",
+                status_online: "متصل", status_offline: "السيرفر مغلق", status_loading: "جاري فحص السيرفر...",
+                copied: "تم النسخ!", click_to_copy: "اضغط لنسخ الايبي (البورت: 25565)",
+                rules_title: "قوانين السيرفر",
+                rule1_title: "1. يمنع الهاك والغش", rule1_desc: "استخدام الإكس-راي أو الكلاينتات المعدلة سيؤدي إلى حظر نهائي.",
+                rule2_title: "2. احترام جميع اللاعبين", rule2_desc: "يمنع الإزعاج، العنصرية، أو التوكسيك في الشات العام.",
+                rule3_title: "3. يمنع تخريب المناطق المحمية", rule3_desc: "مسموح مداهمة الأراضي غير المحمية، لكن تخطي حماية الأراضي ممنوع.",
+                ranks_title: "رتب السيرفر", ranks_desc: "ادعم السيرفر واحصل على ميزات عادلة. لا يوجد نظام الدفع للفوز.",
+                perk_queue: "أولوية الدخول", perk_homes: "3 أماكن حفظ", perk_prefix: "لقب مخصص",
+                perk_homes5: "5 أماكن حفظ", perk_kit: "بكج أسبوعي", perk_color: "شات ملون",
+                perk_all: "جميع ميزات VIP+", perk_homes10: "10 أماكن حفظ", perk_fly: "طيران في السباون",
+                buy_now: "شراء", popular: "الأكثر طلباً",
+                staff_title: "إدارة السيرفر", role_admin: "إدارة", role_mod: "مراقب"
+            }
+        };
+
+        const langToggleBtn = document.getElementById('langToggle');
+        const htmlTag = document.documentElement;
+
+        function updateLanguage() {
+            // Update direction and font class
+            htmlTag.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            htmlTag.lang = currentLang;
+            
+            if (currentLang === 'ar') {
+                document.body.classList.remove('ltr-font');
+                document.body.classList.add('rtl-font');
+                langToggleBtn.textContent = 'English';
+            } else {
+                document.body.classList.remove('rtl-font');
+                document.body.classList.add('ltr-font');
+                langToggleBtn.textContent = 'عربي';
+            }
+
+            // Safe DOM manipulation using textContent to prevent XSS
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    // For the hero title, we have nested HTML. To be secure, we reconstruct it programmatically.
+                    if (key === 'hero_title') {
+                        el.textContent = currentLang === 'en' ? 'The Ultimate ' : 'أفضل تجربة ';
+                        const span = document.createElement('span');
+                        span.className = 'text-transparent bg-clip-text bg-gradient-to-r from-mc to-emerald-400';
+                        span.textContent = currentLang === 'en' ? 'SMP' : 'سيرفايفل';
+                        el.appendChild(span);
+                        if(currentLang === 'en') el.appendChild(document.createTextNode(' Experience'));
+                    } else {
+                        el.textContent = translations[currentLang][key];
+                    }
+                }
+            });
+            
+            // Re-render status if already loaded
+            updateServerStatusUI();
+        }
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            updateLanguage();
+        });
+
+        /**
+         * 📋 COPY IP LOGIC
+         */
+        const copyIpBtn = document.getElementById('copyIpBtn');
+        const copyFeedback = document.getElementById('copyFeedback');
+        
+        copyIpBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(CONFIG.SERVER_IP).then(() => {
+                copyFeedback.classList.remove('translate-y-full');
+                setTimeout(() => {
+                    copyFeedback.classList.add('translate-y-full');
+                }, 2000);
+            }).catch(err => {
+                console.error('Copy failed', err);
+            });
+        });
+
+        /**
+         * 🔐 SECURE API LAYER WITH RATE LIMITING
+         */
+        const APICache = {
+            mc: { data: null, timestamp: 0 },
+            discord: { data: null, timestamp: 0 }
+        };
+
+        async function safeFetch(url, cacheKey) {
+            const now = Date.now();
+            // Rate Limit / Cache check
+            if (now - APICache[cacheKey].timestamp < CONFIG.API_RATE_LIMIT_MS && APICache[cacheKey].data) {
+                return APICache[cacheKey].data;
+            }
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.json();
+                
+                // Update Cache
+                APICache[cacheKey] = { data, timestamp: now };
+                return data;
+            } catch (error) {
+                console.error(`API Error (${cacheKey}):`, error);
+                return null; // Triggers fallback UI
+            }
+        }
+
+        /**
+         * 🎮 MINECRAFT STATUS
+         */
+        let currentPlayers = null;
+        let isOnline = false;
+
+        async function fetchMinecraftStatus() {
+            const data = await safeFetch(CONFIG.MINECRAFT_API, 'mc');
+            if (data && data.online) {
+                isOnline = true;
+                // Securely read nested integers (prevent prototype pollution / type errors)
+                currentPlayers = Number(data.players?.online || 0);
+            } else {
+                isOnline = false;
+            }
+            updateServerStatusUI();
+        }
+
+        function updateServerStatusUI() {
+            const statusDot = document.getElementById('statusDot');
+            const countText = document.getElementById('playerCount');
+
+            if (isOnline) {
+                statusDot.className = 'w-3 h-3 rounded-full bg-mc shadow-[0_0_10px_#22c55e]';
+                // Safe concatenation
+                countText.textContent = `${currentPlayers} ` + (currentLang === 'en' ? 'Players Online' : 'لاعب متصل');
+            } else {
+                statusDot.className = 'w-3 h-3 rounded-full bg-red-500';
+                countText.textContent = translations[currentLang].status_offline;
+            }
+        }
+
+        /**
+         * 🛡️ DISCORD STAFF FALLBACK & RENDER
+         */
+        // Fallback data if API fails or is rate-limited
+        const fallbackStaff = [
+            { username: 'VexerOwner', role: 'Owner', avatarUrl: 'https://cdn.discordapp.com/embed/avatars/0.png' },
+            { username: 'AdminSteve', role: 'Admin', avatarUrl: 'https://cdn.discordapp.com/embed/avatars/1.png' },
+            { username: 'ModAlex', role: 'Moderator', avatarUrl: 'https://cdn.discordapp.com/embed/avatars/2.png' },
+            { username: 'HelperJohn', role: 'Helper', avatarUrl: 'https://cdn.discordapp.com/embed/avatars/3.png' }
+        ];
+
+        async function fetchDiscordStaff() {
+            const container = document.getElementById('staffContainer');
+            container.innerHTML = ''; // Clear skeleton
+            
+            // Replace 'YOUR_SERVER_ID' to fetch real data, otherwise fallback triggers securely
+            const data = await safeFetch(CONFIG.DISCORD_API, 'discord');
+            
+            let staffList = fallbackStaff;
+
+            // Simple parser if the widget works (assumes widget returns members array)
+            if (data && data.members && data.members.length > 0) {
+                // Map top 4 members safely
+                staffList = data.members.slice(0, 4).map(member => ({
+                    username: String(member.username), // Force string
+                    role: 'Staff', // Widget API doesn't expose roles perfectly, default to Staff
+                    avatarUrl: String(member.avatar_url)
+                }));
+            }
+
+            // Secure DOM Construction (NO innerHTML for raw data)
+            staffList.forEach(staff => {
+                const card = document.createElement('div');
+                card.className = 'bg-gray-800 p-4 rounded-xl border border-gray-700 flex flex-col items-center text-center';
+
+                const img = document.createElement('img');
+                // Validate URL starts with https (basic sanitizer)
+                img.src = staff.avatarUrl.startsWith('https://') ? staff.avatarUrl : 'https://cdn.discordapp.com/embed/avatars/0.png';
+                img.alt = `${staff.username} Avatar`;
+                img.className = 'w-20 h-20 rounded-full mb-3 border-2 border-brand';
+                img.loading = 'lazy'; // SEO/Performance: Lazy loading
+
+                const name = document.createElement('h4');
+                name.className = 'font-bold text-white text-lg';
+                name.textContent = staff.username; // SECURE: textContent prevents XSS
+
+                const role = document.createElement('span');
+                role.className = 'text-brand text-sm font-semibold';
+                role.textContent = staff.role;
+
+                card.appendChild(img);
+                card.appendChild(name);
+                card.appendChild(role);
+                container.appendChild(card);
+            });
+        }
+
+        /**
+         * 🚀 INITIALIZATION
+         */
+        window.addEventListener('DOMContentLoaded', () => {
+            updateLanguage(); // Set default state
+            fetchMinecraftStatus();
+            fetchDiscordStaff();
+            
+            // Optional: Auto-refresh status every 60 seconds
+            setInterval(fetchMinecraftStatus, 60000);
+        });
+
+    </script>
+</body>
+</html>
